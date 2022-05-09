@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+
+import { DropdownItem } from './DropdownItem';
+import { dropdownListData } from './helper';
+
 import './App.css';
 
-function App() {
+const App = () => {
+  const [isOpenList, setOpenList] = useState(false);
+  const handleOpen = () => setOpenList(!isOpenList);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ul className="dropdown-list" onClick={handleOpen}>
+      {dropdownListData.map((item, index) =>
+        <DropdownItem
+          key={index}
+          item={item}
+          isOpenList={isOpenList}
+          dropdownData={dropdownListData}
+          index={index}
+        />
+      )}
+    </ul>
   );
-}
+};
+
 
 export default App;
